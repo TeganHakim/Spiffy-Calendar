@@ -20,6 +20,8 @@ def index(request):
     admin_password = os.getenv('PASSWORD')
     # Log into Jobber and find elements
     driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
     wait = WebDriverWait(driver, 10)
     driver.get("https://www.getjobber.com/login")
     wait.until(EC.presence_of_element_located(("id", "email")))
