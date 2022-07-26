@@ -14,7 +14,10 @@ SECRET_KEY = 'django-insecure-&sb&6_1pu*t@h65go2x-$xn&gzno57g7nxru1h(v3otrc670f+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'spiffy-calendar.herokuapp.com'
+]
 
 
 # Application definition
