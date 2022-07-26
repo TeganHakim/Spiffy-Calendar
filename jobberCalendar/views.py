@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time, json, os
@@ -19,9 +20,11 @@ def index(request):
     admin_email = os.getenv('EMAIL')
     admin_password = os.getenv('PASSWORD')
     # Log into Jobber and find elements
-    driver = webdriver.Chrome()
     options = webdriver.ChromeOptions()
+    options.add_argument("--start-maximized");
     options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+
     wait = WebDriverWait(driver, 10)
     driver.get("https://www.getjobber.com/login")
     wait.until(EC.presence_of_element_located(("id", "email")))
