@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="icon" href="{% static 'spiffy.jpg' %}" />
+    <title>Spiffy Calendar</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekday.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekOfYear.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+      let date = document.querySelector("#selected-month").innerText;
+      getStartDate();
+      populateCurrentMonth();
+      buttons = document.querySelectorAll(".cal-button");
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+          handleMonths();
+        });
+      }
+
+      function getStartDate() {
+        const date = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
+        const month = date.format("M");
+        const year = date.format("YYYY");
+        return dayjs(new Date(year, month - 1)).format("MMMM YYYY");
+      }
+      function getNextMonth() {
+        const date = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH, 1));
+        const month = date.format("M");
+        const year = date.format("YYYY");
+        return dayjs(new Date(year, month - 1)).format("MMMM YYYY");
+      }
+      function getCurrentDate() {
+        date = document.querySelector("#selected-month").innerText;
+        return date;
+      }
+      function handleMonths() {
+            if (getCurrentDate() === getStartDate()) {
+              populateCurrentMonth();
+            } else if (getCurrentDate() === getNextMonth()) {
+                populateNextMonth();
+            }
+            
+      }
+      function populateCurrentMonth() {
+        const data = JSON.parse("{{data|escapejs}}")
+        const calendarDays = document.querySelectorAll(".calendar-day");
+        let today;
+        for (let i = 0; i < calendarDays.length; i++) {
+          if (calendarDays[i].classList.contains("calendar-day--today")) {
+            today = i;
+          }
+        }
+        for (let i = 0; i < calendarDays.length; i++) {
+          if (
+            calendarDays[i].classList.contains("calendar-day--not-current") ||
+            i < today
+          ) {
+            continue;
+          }
+          let numJobs = document.createElement("ul");
+          numJobs.style = "padding-left: 10px;";
+          for (let j = 0; j < data["current"][i - today].length; j++) {
+            let job = document.createElement("li");
+            job.style = "font-weight: bolder; font-size: 12px";
+            job.innerText = data["current"][i - today][j];
+            numJobs.appendChild(job);
+          }
+          numJobs.classList.add("num-jobs");
+          calendarDays[i].appendChild(numJobs);
+        }
+      }
+      function populateNextMonth() {
+        const data = JSON.parse("{{data|escapejs}}")
+        const calendarDays = document.querySelectorAll(".calendar-day");
+        for (let i = 0; i < calendarDays.length; i++) {
+          if (
+            calendarDays[i].classList.contains("calendar-day--not-current")
+          ) {
+            continue;
+          }
+          let numJobs = document.createElement("ul");
+          numJobs.style = "padding-left: 10px;";
+          for (let j = 0; j < data["next"][i].length; j++) {
+            let job = document.createElement("li");
+            job.style = "font-weight: bolder; font-size: 12px";
+            job.innerText = data["next"][i][j];
+            numJobs.appendChild(job);
+          }
+          numJobs.classList.add("num-jobs");
+          calendarDays[i].appendChild(numJobs);
+        }
+      }
+    </script>
+  </body>
+</html>
