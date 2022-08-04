@@ -68,35 +68,52 @@
           }
           let numJobs = document.createElement("ul");
           numJobs.style = "padding-left: 10px;";
+          let totalJobs = document.createElement("p");
+          totalJobs.style = "position: absolute; right: 15px; bottom: 10px; font-weight: bold; font-size: 14px; border: 1px solid black; padding: 5px;";
+          let total = 0;
           for (let j = 0; j < data["current"][i - today].length; j++) {
             let job = document.createElement("li");
             job.style = "font-weight: bolder; font-size: 12px";
             job.innerText = data["current"][i - today][j];
+            total += parseInt(data["current"][i - today][j].match(/\d+/)[0]);
             numJobs.appendChild(job);
           }
+          console.log(total);
+          totalJobs.innerHTML = "Total: " + total.toString();
           numJobs.classList.add("num-jobs");
+          totalJobs.classList.add("total-jobs");
           calendarDays[i].appendChild(numJobs);
+          calendarDays[i].appendChild(totalJobs);
         }
       }
       function populateNextMonth() {
         const data = JSON.parse("{{data|escapejs}}")
         const calendarDays = document.querySelectorAll(".calendar-day");
+        let start_day;
         for (let i = 0; i < calendarDays.length; i++) {
           if (
             calendarDays[i].classList.contains("calendar-day--not-current")
           ) {
+            start_day = i + 1;
             continue;
           }
           let numJobs = document.createElement("ul");
           numJobs.style = "padding-left: 10px;";
-          for (let j = 0; j < data["next"][i].length; j++) {
+          let totalJobs = document.createElement("p");
+          totalJobs.style = "position: absolute; right: 15px; bottom: 10px; font-weight: bold; font-size: 14px; border: 1px solid black; padding: 5px;";
+          let total = 0;
+          for (let j = 0; j < data["next"][i - start_day].length; j++) {
             let job = document.createElement("li");
             job.style = "font-weight: bolder; font-size: 12px";
-            job.innerText = data["next"][i][j];
+            job.innerText = data["next"][i - start_day][j];
+            total += parseInt(data["next"][i - start_day][j].match(/\d+/)[0]);
             numJobs.appendChild(job);
           }
+          totalJobs.innerText = "Total: " + total.toString();
           numJobs.classList.add("num-jobs");
+          totalJobs.classList.add("total-jobs");
           calendarDays[i].appendChild(numJobs);
+          calendarDays[i].appendChild(totalJobs);
         }
       }
     </script>

@@ -16,7 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '0.0.0.0',
-    'spiffy-calendar.herokuapp.com'
+    'spiffy-calendar.herokuapp.com',
+    'localhost'
 ]
 
 

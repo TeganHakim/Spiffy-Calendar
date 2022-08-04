@@ -90,6 +90,9 @@ li {
   top: 2px;
   width: var(--day-label-size);
   height: var(--day-label-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar-day--not-current {
