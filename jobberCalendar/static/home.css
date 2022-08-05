@@ -1,0 +1,64 @@
+:root {
+    --base: #163851;
+    --accent: #b1dd00;
+    --neutral: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--base);  
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;  
+}
+
+kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    color: var(--base);
+    display: inline-block;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+
+a {
+    cursor: pointer;
+    color: var(--base);
+    text-decoration: none;
+}
+
+.spiffy-splash {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.spiffy-text {
+    font-family: sans-serif;
+    font-size: 10vw;
+    line-height: 97%;
+    width: 50vw;
+    color: var(--accent);
+    transform: translateY(-10vh);
+}
+
+.spiffy-intructions {
+    font-family: sans-serif;
+    font-size: 1vw;
+    color: var(--neutral);
+    transform: translateY(-10vh);
+}

@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'loading.css' %}" />
+    <link rel="icon" href="{% static 'spiffy.jpg' %}" />
+    <title>Spiffy Calendar</title>
+  </head>
+  <body>
+    <div class="loading-area">
+        <div class="load-ring"></div>
+        <p class="load-text">Please wait...</p>
+        <p class="load-text">Gathering data and spiffying up calendar</p>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            location.href = "calendar/";
+        });
+    </script>
+  </body>
+</html>

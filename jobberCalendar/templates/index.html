@@ -78,7 +78,6 @@
             total += parseInt(data["current"][i - today][j].match(/\d+/)[0]);
             numJobs.appendChild(job);
           }
-          console.log(total);
           totalJobs.innerHTML = "Total: " + total.toString();
           numJobs.classList.add("num-jobs");
           totalJobs.classList.add("total-jobs");

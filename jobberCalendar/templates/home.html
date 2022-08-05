@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'home.css' %}" />
+    <link rel="icon" href="{% static 'spiffy.jpg' %}" />
+    <title>Spiffy Calendar</title>
+  </head>
+  <body>
+    <div class="spiffy-splash">
+        <h1 class="spiffy-text">Spiffy Bin Calendar</h1>
+        <p class="spiffy-intructions">To access, goto <kbd><a onclick="location.href='/admin'">https://spiffybin.heroku.app/admin</a></kbd> and enter admin credentials</p>
+    </div>
+  </body>
+</html>
