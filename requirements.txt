@@ -1,4 +1,4 @@
-asgiref==3.5.21
+asgiref==3.5.2
 h11==0.13.0
 ansicon==1.89.0
 anyio==3.6.1
