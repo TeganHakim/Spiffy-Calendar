@@ -1,13 +1,13 @@
 from __future__ import absolute_import
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mycelery.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'spiffyCalendar.settings')
     
 from django.conf import settings
 from celery import Celery
     
-app = Celery('mycelery',
-    backend='amqp',
-    broker='amqp://guest@localhost//')
+app = Celery('tasks',
+    backend='rpc://',
+    broker='amqp://guest:guest@localhost//5672')
     
 # This reads, e.g., CELERY_ACCEPT_CONTENT = ['json'] from settings.py:
 app.config_from_object('django.conf:settings')
