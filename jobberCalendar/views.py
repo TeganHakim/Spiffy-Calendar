@@ -27,5 +27,4 @@ def index(request):
             "next": []
     }
     task = scrape_spiffy.delay(num_jobs)
-
     return render(request, "index.html", {"data": json.dumps(num_jobs)})

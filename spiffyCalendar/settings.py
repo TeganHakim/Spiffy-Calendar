@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jobberCalendar.apps.JobbercalendarConfig'
+    'jobberCalendar.apps.JobbercalendarConfig',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -119,9 +120,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-BROKER_URL = 'amqp://guest:guest@localhost//5672'
-CELERY_ACCEPT_CONTENT = ['json']
+# Celery
+BROKER_URL = 'amqp://guest:guest@localhost/5672'
+CELERY_RESULT_BACKEND = 'rpc://localhost'
+CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+CELERY_TIMEZONE = 'UTC'
 CELERY_TASK_RESULT_EXPIRES = 18000 # 5 hours
+
+# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_CACHE_BACKEND = 'django-cache'
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'my_cache_table',
+#     }
+# }

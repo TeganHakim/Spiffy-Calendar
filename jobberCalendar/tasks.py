@@ -1,4 +1,4 @@
-from celery import shared_task,current_task
+from celery import shared_task, current_task
 from django.shortcuts import render, redirect   
 from django.contrib.auth.decorators import login_required
 from selenium import webdriver
@@ -13,6 +13,7 @@ from dateutil import relativedelta
 
 @shared_task
 def scrape_spiffy(num_jobs):
+    print("hi")
     try:
         # Load credentials
         dotenv.load_dotenv()
